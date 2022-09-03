@@ -1,7 +1,24 @@
 const { env } = require('./env')
-const UPLOAD_PATH = env === 'dev' ? 'D:\\workplace\\XiaoMuDu\\imooc\\admin-upload-ebook' : '/root/upload/admin-upload/ebook'
-const OLD_UPLOAD_URL = env === 'dev' ? 'http://www.xinwenkan.top:8089/res/img' : 'https://www.xinwenkan.top:8089/res/img'
-const UPLOAD_URL = env === 'dev' ? 'http://www.xinwenkan.top:8089' : 'https://www.xinwenkan.top:8089'
+
+let resUrl
+let mp3FilePath
+let dbHost
+let dbUser
+let dbPwd
+
+if (env === 'dev') {
+    dbHost = 'localhost'
+    dbUser = 'root'
+    dbPwd = '12345678'
+} else if (env === 'prod') {
+    dbHost = '47.94.255.67'
+    dbUser = 'root'
+    dbPwd = 'Ab123456789@'
+}
+
+const UPLOAD_PATH = env === 'prod' ? 'D:\\workplace\\XiaoMuDu\\imooc\\admin-upload-ebook' : '/root/upload/admin-upload/ebook'
+const OLD_UPLOAD_URL = env === 'prod' ? 'http://www.xinwenkan.top:8089/res/img' : 'https://www.xinwenkan.top:8089/res/img'
+const UPLOAD_URL = env === 'prod' ? 'http://www.xinwenkan.top:8089' : 'https://www.xinwenkan.top:8089'
 module.exports = {
     CODE_ERROR: -1,
     CODE_SUCCESS: 0,
@@ -13,5 +30,8 @@ module.exports = {
     UPLOAD_PATH,
     MIME_TYPE_EPUB: 'application/epub+zip',
     UPLOAD_URL,
-    OLD_UPLOAD_URL
+    OLD_UPLOAD_URL,
+    dbHost,
+    dbPwd,
+    dbUser
 }
